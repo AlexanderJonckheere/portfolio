@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alexander Jonckheere — Portfolio</title>
+  <meta name="description" content="Portfolio of Alexander Jonckheere — designer & developer.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=36">
+</head>
+<body>
+  <div class="transition" aria-hidden="true"><div class="transition__scan"></div></div>
+  <div class="paper" aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"><span class="cursor__label">view</span></div>
+
+  <header class="nav">
+    <a href="#top" class="nav__logo">AJ<sup>©26</sup></a>
+    <nav class="nav__links">
+      <a href="#work"><span>Work</span></a>
+      <a href="#about"><span>About</span></a>
+      <a href="#contact"><span>Contact</span></a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- ============ HOME — poster ============ -->
+    <section class="hero">
+      <div class="poster">
+        <!-- BACK LAYER: xerox scraps, clippings, outline boxes, ink -->
+        <div class="layer layer--back" data-depth="0.4">
+          <div class="ink p-ink p-ink--1" data-seed="4"></div>
+          <div class="ink p-ink p-ink--2" data-seed="9"></div>
+          <div class="ink p-ink p-ink--3" data-seed="21"></div>
+
+          <div class="ph scrap s1" data-seed="11" data-tear><span class="ph__label">IMG_01</span></div>
+          <div class="ph scrap s2" data-seed="5" data-tear><span class="ph__label">IMG_02</span></div>
+          <div class="ph scrap s3" data-seed="27" data-tear></div>
+          <div class="ph scrap s4" data-seed="38" data-tear><span class="ph__label">IMG_03</span></div>
+          <div class="ph scrap s5" data-seed="16" data-tear></div>
+
+          <div class="clipping c1 js-clipping" data-tear></div>
+          <div class="clipping c2 js-clipping" data-tear></div>
+          <div class="clipping c3 js-clipping" data-tear></div>
+
+
+          <span class="box b1"></span>
+          <span class="box b2"></span>
+          <span class="box-grid g1"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+        </div>
+
+        <!-- THE FIGURE: my name -->
+        <h1 class="poster__name" aria-label="Alexander Jonckheere" data-depth="0.7">
+          <span class="poster__line js-chars">Alexander</span>
+          <span class="poster__line js-chars">Jonckheere</span>
+        </h1>
+
+        <!-- FRONT LAYER: colour, splats, hairlines, strokes, scraps over the letters -->
+        <div class="layer layer--front" data-depth="1.2">
+          <span class="hairline h1"></span>
+          <span class="hairline h2 hairline--mint"></span>
+          <span class="hairline h3"></span>
+          <span class="hairline h4 hairline--pink"></span>
+          <span class="hairline h5"></span>
+          <span class="hairline h6 hairline--mint"></span>
+
+          <div class="splat sp1" data-seed="7"></div>
+          <div class="splat sp2" data-seed="13"></div>
+          <div class="splat splat--mint sp3" data-seed="29"></div>
+
+          <span class="block block--pink f1 js-drag"></span>
+          <span class="block block--pink f2 js-drag"></span>
+          <span class="block block--pink f3 js-drag"></span>
+          <span class="block block--mint f4 js-drag"></span>
+          <span class="block block--pink f5 js-drag"></span>
+
+          <div class="ph scrap t1 js-drag" data-seed="44" data-tear></div>
+          <div class="ph scrap t2 js-drag" data-seed="52" data-tear></div>
+          <div class="clipping t3 js-clipping js-drag" data-tear></div>
+
+          <span class="dot-circle dc1 js-drag"></span>
+          <span class="dot-circle dot-circle--mint dc2 js-drag"></span>
+          <span class="dot-circle dc3"></span>
+          <span class="dot-circle dot-circle--black dc4"></span>
+
+          <svg class="strokes" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M40 470 L330 430" stroke-width="16" />
+            <path d="M60 500 L250 488" stroke-width="5" />
+            <path d="M640 110 L930 52" stroke-width="9" />
+            <path d="M560 250 L605 590" stroke-width="2" />
+            <path d="M120 90 L250 250" stroke-width="5" />
+            <path d="M700 470 C 735 420, 760 520, 800 465 S 860 420, 905 500 S 950 440, 980 470" stroke-width="3" />
+            <path d="M330 40 C 360 80, 300 110, 345 150" stroke-width="3" />
+            <path d="M860 300 L990 330" stroke-width="12" />
+          </svg>
+        </div>
+
+        <!-- TOP LAYER: labels stay crisp (not blended) -->
+        <div class="layer layer--top" data-depth="1.4">
+          <p class="poster__bg-type" aria-hidden="true"><span class="bg-word" data-tear>Digital</span> <span class="bg-word" data-tear>Design</span><br><span class="bg-word" data-tear>&amp;</span> <span class="bg-word" data-tear>Development</span></p>
+          <span class="label label--black poster__tag js-scramble">VOL.03 — DEVINE</span>
+        </div>
+
+        <!-- TYPE around the edges -->
+        <p class="poster__vert small">Devine — Digital Design &amp; Development · Howest University of Applied Sciences · Kortrijk (BE) · 2024 — 2026</p>
+        <p class="poster__para small" data-tear>
+          Never regret thy fall,<br>
+          O Icarus of the fearless flight<br>
+          For the greatest tragedy of them all<br>
+          Is never to feel the burning light.<br>
+          <span class="poster__para-credit">— Oscar Wilde</span>
+        </p>
+        <ul class="poster__list">
+          <li>3D Design</li>
+          <li>Motion Design</li>
+          <li>Creative Code</li>
+          <li>Visual Design</li>
+        </ul>
+        <div class="poster__foot">
+          <span class="barcode" aria-hidden="true"></span>
+          <span class="label label--white">Kortrijk, BE</span>
+        </div>
+        <p class="poster__drag small">( drag the pieces )</p>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section class="work" id="work">
+      <div class="ink work__ink js-ink" data-seed="31"></div>
+      <header class="section-head">
+        <span class="label label--black js-scramble js-index-count">Index (05)</span>
+        <h2 class="section-title js-chars">Selected Work</h2>
+        <p class="small section-note">Figma prototypes &amp; motion pieces made during Devine, 2024 — 2026. Click a project to open it.</p>
+      </header>
+
+      <ol class="work__list js-work-list"><!-- filled by main.js --></ol>
+
+      <!-- personal projects: small toggle under the list, opens a second list -->
+      <div class="personal">
+        <button class="label label--black personal__toggle js-personal-toggle" aria-expanded="false" aria-controls="personal-panel">
+          Personal projects <span class="js-personal-count">(03)</span> <span class="personal__icon" aria-hidden="true">+</span>
+        </button>
+        <div class="personal__panel" id="personal-panel">
+          <ol class="work__list work__list--personal js-personal-list"></ol>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="about" id="about">
+      <div class="about__collage">
+        <div class="ph about__portrait js-paste" data-seed="44" data-speed="0.1" data-tear>
+          <img src="assets/images/portfolio_placeholder_self.png" alt="Portrait of Alexander Jonckheere">
+        </div>
+        <span class="block block--orange about__block about__block--1 js-block" data-speed="0.3"></span>
+        <span class="block block--mint about__block about__block--2 js-block" data-speed="-0.25"></span>
+        <div class="ink about__ink js-ink" data-seed="17"></div>
+        <span class="label label--black label--lg about__label js-scramble">About me</span>
+      </div>
+
+      <div class="about__text">
+        <h2 class="about__lead js-words">
+          Hi, I'm Alexander, a <mark class="hl">Digital Design &amp; Development</mark> student at Howest.
+        </h2>
+        <div class="about__cols">
+          <p>i like making stuff. In my free time I love working with wood and metal, or anything els to be honnest. Sometimes Im at my desk modelling something new in 3D. I like seeing an idea turn into something real. I like to belive that when you want something you can make it real, doesnt matter what you already know or who you are.</p>
+          <p>When I'm not at home, you'll find me running or out on a hike. I'm also into cooking, planes, music, video games, reading,...</p>
+        </div>
+
+        <!-- Capabilities: three pasted cards, same layout -->
+        <div class="caps">
+          <header class="caps__head">
+            <span class="label label--black js-scramble">Capabilities</span>
+            <h3 class="caps__title">What I do</h3>
+          </header>
+
+          <div class="caps__grid">
+            <!-- 01 DEVELOPMENT: terminal -->
+            <article class="cap cap--dev" data-rot="-1.4" style="--accent: var(--mint)">
+              <span class="block block--mint cap__tape" data-tear></span>
+              <span class="cap__num">01</span>
+              <span class="label label--mint">Development</span>
+              <h4 class="cap__title">Code</h4>
+              <ul class="cap__items cap__items--term">
+                <li class="term-cmd"><span class="term-p">$</span> <span class="term-t">skills --code</span></li>
+                <li><span class="term-p">&gt;</span> <span class="term-t">HTML</span></li>
+                <li><span class="term-p">&gt;</span> <span class="term-t">CSS</span></li>
+                <li><span class="term-p">&gt;</span> <span class="term-t">JavaScript</span></li>
+                <li><span class="term-p">&gt;</span> <span class="term-t">PHP</span></li>
+                <li><span class="term-p">&gt;</span> <span class="term-t">React</span></li>
+                <li><span class="term-p">&gt;</span> <span class="term-t">React Native</span></li>
+                <li><span class="term-p">&gt;</span> <span class="term-t">GSAP</span></li>
+                <li><span class="term-p">&gt;</span> <span class="term-t">Three.js</span></li>
+                <li><span class="term-p">&gt;</span> <span class="term-t">ml5.js</span></li>
+                <li class="term-cmd" aria-hidden="true"><span class="term-p">$</span> <span class="term-cursor"></span></li>
+              </ul>
+            </article>
+
+            <!-- 02 DESIGN: swatches -->
+            <article class="cap cap--design" data-rot="1" style="--accent: var(--pink)">
+              <span class="block block--pink cap__tape" data-tear></span>
+              <span class="cap__num">02</span>
+              <span class="label label--pink">Graphic design</span>
+              <h4 class="cap__title">Design</h4>
+              <ul class="cap__items cap__items--swatch">
+                <li><span class="dot"></span>Photoshop</li>
+                <li><span class="dot"></span>Illustrator</li>
+                <li><span class="dot"></span>After Effects</li>
+                <li><span class="dot"></span>Figma</li>
+                <li><span class="dot"></span>Blender</li>
+                <li><span class="dot"></span>Maya</li>
+                <li><span class="dot"></span>Fusion 360</li>
+                <li><span class="dot"></span>Adobe Audition</li>
+                <li><span class="dot"></span>Substance Painter</li>
+                <li><span class="dot"></span>Unreal Engine</li>
+                <li><span class="dot"></span>Projection mapping</li>
+              </ul>
+            </article>
+
+            <!-- 03 UX: process line -->
+            <article class="cap cap--ux" data-rot="-0.6" style="--accent: var(--orange)">
+              <span class="block block--orange cap__tape" data-tear></span>
+              <span class="cap__num">03</span>
+              <span class="label label--orange">User experience</span>
+              <h4 class="cap__title">UX</h4>
+              <ol class="cap__items cap__items--flow">
+                <li>User research</li>
+                <li>Personas &amp; journeys</li>
+                <li>Information architecture</li>
+                <li>Wireframing</li>
+                <li>Prototyping</li>
+                <li>Interaction design</li>
+                <li>Usability testing</li>
+                <li>Accessibility (WCAG)</li>
+              </ol>
+            </article>
+          </div>
+        </div>
+
+        <dl class="about__facts small">
+          <div><dt>Based in</dt><dd>Kortrijk, BE</dd></div>
+          <div><dt>Studying</dt><dd>Devine, Howest</dd></div>
+          <div><dt>Year</dt><dd>3 / 3</dd></div>
+        </dl>
+      </div>
+
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="contact" id="contact">
+      <div class="ink contact__ink contact__ink--1 js-ink" data-seed="52"></div>
+      <div class="ink contact__ink contact__ink--2 js-ink" data-seed="61"></div>
+      <span class="label label--mint js-scramble">Got a project? Let's talk.</span>
+
+      <a href="mailto:alexander.jonckheere@student.howest.be" class="contact__btn js-magnetic" data-cursor="mail">
+        <span class="contact__btn-shadow" aria-hidden="true"></span>
+        <span class="contact__btn-face">
+          <span class="contact__btn-text js-magnetic-inner">Contact<br>me</span>
+        </span>
+      </a>
+
+      <a href="mailto:alexander.jonckheere@student.howest.be" class="label label--black contact__email">alexander.jonckheere@student.howest.be</a>
+
+      <ul class="contact__socials">
+        <li><a href="https://www.behance.net/alexandjonckhe1" target="_blank" rel="noopener">Behance</a></li>
+        <li><a href="https://github.com/AlexanderJonckheere" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer small">
+    <span>© 2026 Alexander Jonckheere</span>
+    <span class="barcode barcode--sm" aria-hidden="true"></span>
+    <a href="#top">Back to top ↑</a>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Draggable.min.js"></script>
+  <script src="js/projects.js?v=36"></script>
+  <script src="js/shared.js?v=36"></script>
+  <script src="js/main.js?v=36"></script>
+</body>
+</html>

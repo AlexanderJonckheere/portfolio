@@ -8,11 +8,19 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=46">
+  <link rel="stylesheet" href="css/style.css?v=53">
 </head>
 <body>
   <div class="transition" aria-hidden="true"><div class="transition__scan"></div></div>
   <div class="paper" aria-hidden="true"></div>
+  <!-- loading screen (js/loader.js) -->
+  <div class="loader" role="status" aria-label="Loading">
+    <div class="loader__grit" aria-hidden="true"></div>
+    <div class="loader__center">
+      <p class="loader__word">LOADING</p>
+      <p class="loader__meta"><span class="label label--black"><span class="js-loader-pct">000</span>%</span></p>
+    </div>
+  </div>
   <div class="face-pop" aria-hidden="true"><span class="face-pop__text">Me!</span></div>
   <div class="cursor" aria-hidden="true"><span class="cursor__label">view</span></div>
 
@@ -283,8 +291,9 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="js/projects.js?v=46"></script>
-  <script src="js/shared.js?v=46"></script>
-  <script src="js/main.js?v=46"></script>
+  <script src="js/projects.js?v=53"></script>
+  <script src="js/loader.js?v=53"></script>
+  <script src="js/shared.js?v=53"></script>
+  <script src="js/main.js?v=53"></script>
 </body>
 </html>

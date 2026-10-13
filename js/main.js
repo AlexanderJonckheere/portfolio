@@ -582,9 +582,16 @@ document.fonts.ready.then(placeBgType);
 window.addEventListener("resize", placeBgType);
 const intro = prefersReducedMotion ? null : heroIntro(nameChars);
 
-// textures for the clippings / project list, then play the poster intro
-Promise.all([texturesReady, applyTextures(document.querySelector(".poster")), applyTextures(document.querySelector(".work"))])
-  .then(() => intro && intro.play());
+// the loading screen waits for textures, fonts and images; the visitor then
+// clicks "Enter" and the poster intro plays
+const pageLoaded = new Promise((res) => (document.readyState === "complete" ? res() : addEventListener("load", res, { once: true })));
+runLoader([
+  texturesReady,
+  applyTextures(document.querySelector(".poster")),
+  applyTextures(document.querySelector(".work")),
+  document.fonts.ready,
+  pageLoaded,
+]).then(() => intro && intro.play());
 
 initWork();
 initPersonal();

@@ -1,4 +1,4 @@
-// Project detail page — renders a project from ?p=<slug>.
+// Project detail page - renders a project from ?p=<slug>.
 // Optional sections (concept, gallery, question, team, process, reflection)
 // only appear when the project in projects.js has them.
 
@@ -11,7 +11,7 @@ function figmaEmbedUrl(url) {
 function renderMedia(p, index) {
   const { media } = p;
   if (media.type === "figma" && media.url) {
-    return `<iframe src="${figmaEmbedUrl(media.url)}" allowfullscreen loading="lazy" title="${p.title} — Figma"></iframe>`;
+    return `<iframe src="${figmaEmbedUrl(media.url)}" allowfullscreen loading="lazy" title="${p.title} - Figma"></iframe>`;
   }
   if (media.type === "video" && media.src) {
     return `<video src="${media.src}" ${media.poster ? `poster="${media.poster}"` : ""} controls playsinline preload="metadata"></video>`;
@@ -197,7 +197,7 @@ function renderProject() {
   const accent = ACCENTS[p.color];
   const isVideo = p.media && p.media.type === "video";
 
-  document.title = `${p.title} — Alexander Jonckheere`;
+  document.title = `${p.title} - Alexander Jonckheere`;
 
   const meta = [
     ["Year", p.year],

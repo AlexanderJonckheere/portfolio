@@ -10,7 +10,7 @@
 // gallery: a caption string (placeholder image), { src, caption } for an image,
 //          or { video, caption } for a short clip that loops silently.
 //          Extra flags: wide: true (half-width, uncropped), color: true (skip the black & white look),
-//          note: { text, x, y } — floating arrow + glitchy label, x/y in % of the image (top-left of the label)
+//          note: { text, x, y } - floating arrow + glitchy label, x/y in % of the image (top-left of the label)
 // media.size: "small" → shows the media narrower than the full page width (optional)
 const PROJECTS = [
   {
@@ -19,11 +19,11 @@ const PROJECTS = [
     year: "2026",
     role: "Visual design, motion & installation",
     discipline: "Experience design · Installation · App",
-    context: "Howest × Rotterdam — brief by Visit Antwerp",
+    context: "Howest × Rotterdam - brief by Visit Antwerp",
     group: true,
     tags: ["Group project", "Installation", "App", "Motion"],
     color: "pink",
-    media: { type: "video", src: "assets/videos/myst-promo.mp4", poster: "assets/images/myst-poster.jpg", caption: "Promo video — 0:20" },
+    media: { type: "video", src: "assets/videos/myst-promo.mp4", poster: "assets/images/myst-poster.jpg", caption: "Promo video - 0:20" },
     intro:
       "Visit Antwerp asked us to pull young travellers into the city's fashion scene without it ever feeling like an ad. Our answer: hide Antwerp's most personal stores in mist, and let people clear it themselves.",
     body: [
@@ -102,13 +102,13 @@ const PROJECTS = [
     year: "2025",
     role: "UI design",
     discipline: "Web design · Responsive",
-    context: "Devine — typography conference website",
+    context: "Devine - typography conference website",
     tags: ["Figma", "Web", "Typography"],
     color: "mint",
     media: {
       type: "figma",
       url: "https://www.figma.com/design/Z5wHzpx3tRheWy6rDAOx7m/Type01?node-id=314-7358",
-      caption: "Figma file — desktop & mobile",
+      caption: "Figma file - desktop & mobile",
     },
     intro:
       "My first time designing for mobile: a website for Type01, a typography conference, on desktop and phone.",
@@ -124,10 +124,10 @@ const PROJECTS = [
     year: "2025",
     role: "Motion design",
     discipline: "Motion design · Product promo",
-    context: "Devine — Motion Design 2, Kickstarter assignment",
+    context: "Devine - Motion Design 2, Kickstarter assignment",
     tags: ["Motion", "Video", "Kickstarter"],
     color: "orange",
-    media: { type: "video", src: "assets/videos/hengstermann-kickstarter.mp4", poster: "assets/images/hengstermann-poster.jpg", caption: "Kickstarter promo — 0:30", size: "small" },
+    media: { type: "video", src: "assets/videos/hengstermann-kickstarter.mp4", poster: "assets/images/hengstermann-poster.jpg", caption: "Kickstarter promo - 0:30", size: "small" },
     intro:
       "My very first motion project: a Kickstarter promo for Hengstermann Guitars and their hand-poured concrete electric guitar.",
     body: [
@@ -155,7 +155,7 @@ const PROJECTS = [
     context: "Personal project",
     personal: true,
     comingSoon: true,
-    tags: ["Personal", "Metalworking", "Stick-on"],
+    tags: ["Personal", "Metalworking"],
     color: "pink",
   },
   {
@@ -166,8 +166,7 @@ const PROJECTS = [
     context: "Personal project",
     personal: true,
     comingSoon: true,
-    finished: true,
-    tags: ["Personal", "Woodworking", "Jewellery", "Finished"],
+    tags: ["Personal", "Woodworking", "Jewellery"],
     color: "mint",
   },
 ];

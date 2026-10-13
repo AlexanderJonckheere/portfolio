@@ -3,16 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Alexander Jonckheere — Portfolio</title>
-  <meta name="description" content="Portfolio of Alexander Jonckheere — designer & developer.">
+  <title>Alexander Jonckheere - Portfolio</title>
+  <meta name="description" content="Portfolio of Alexander Jonckheere - designer & developer.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=36">
+  <link rel="stylesheet" href="css/style.css?v=46">
 </head>
 <body>
   <div class="transition" aria-hidden="true"><div class="transition__scan"></div></div>
   <div class="paper" aria-hidden="true"></div>
+  <div class="face-pop" aria-hidden="true"><span class="face-pop__text">Me!</span></div>
   <div class="cursor" aria-hidden="true"><span class="cursor__label">view</span></div>
 
   <header class="nav">
@@ -25,7 +26,7 @@
   </header>
 
   <main id="top">
-    <!-- ============ HOME — poster ============ -->
+    <!-- ============ HOME - poster ============ -->
     <section class="hero">
       <div class="poster">
         <!-- BACK LAYER: xerox scraps, clippings, outline boxes, ink -->
@@ -69,18 +70,18 @@
           <div class="splat sp2" data-seed="13"></div>
           <div class="splat splat--mint sp3" data-seed="29"></div>
 
-          <span class="block block--pink f1 js-drag"></span>
-          <span class="block block--pink f2 js-drag"></span>
-          <span class="block block--pink f3 js-drag"></span>
-          <span class="block block--mint f4 js-drag"></span>
-          <span class="block block--pink f5 js-drag"></span>
+          <span class="block block--pink f1 js-sway"></span>
+          <span class="block block--pink f2 js-sway"></span>
+          <span class="block block--pink f3 js-sway"></span>
+          <span class="block block--mint f4 js-sway"></span>
+          <span class="block block--pink f5 js-sway"></span>
 
-          <div class="ph scrap t1 js-drag" data-seed="44" data-tear></div>
-          <div class="ph scrap t2 js-drag" data-seed="52" data-tear></div>
-          <div class="clipping t3 js-clipping js-drag" data-tear></div>
+          <div class="ph scrap t1 js-sway" data-seed="44" data-tear></div>
+          <div class="ph scrap t2 js-sway" data-seed="52" data-tear></div>
+          <div class="clipping t3 js-clipping js-sway" data-tear></div>
 
-          <span class="dot-circle dc1 js-drag"></span>
-          <span class="dot-circle dot-circle--mint dc2 js-drag"></span>
+          <span class="dot-circle dc1 js-sway"></span>
+          <span class="dot-circle dot-circle--mint dc2 js-sway"></span>
           <span class="dot-circle dc3"></span>
           <span class="dot-circle dot-circle--black dc4"></span>
 
@@ -99,17 +100,21 @@
         <!-- TOP LAYER: labels stay crisp (not blended) -->
         <div class="layer layer--top" data-depth="1.4">
           <p class="poster__bg-type" aria-hidden="true"><span class="bg-word" data-tear>Digital</span> <span class="bg-word" data-tear>Design</span><br><span class="bg-word" data-tear>&amp;</span> <span class="bg-word" data-tear>Development</span></p>
-          <span class="label label--black poster__tag js-scramble">VOL.03 — DEVINE</span>
+          <span class="label label--black poster__tag js-scramble">VOL.03 - DEVINE</span>
         </div>
 
         <!-- TYPE around the edges -->
-        <p class="poster__vert small">Devine — Digital Design &amp; Development · Howest University of Applied Sciences · Kortrijk (BE) · 2024 — 2026</p>
+        <p class="poster__vert small">
+          <span>Devine - Digital Design &amp; Development</span>
+          <span>Howest University of Applied Sciences</span>
+          <span>2024 - 2026</span>
+        </p>
         <p class="poster__para small" data-tear>
           Never regret thy fall,<br>
           O Icarus of the fearless flight<br>
           For the greatest tragedy of them all<br>
           Is never to feel the burning light.<br>
-          <span class="poster__para-credit">— Oscar Wilde</span>
+          <span class="poster__para-credit">- Oscar Wilde</span>
         </p>
         <ul class="poster__list">
           <li>3D Design</li>
@@ -121,7 +126,6 @@
           <span class="barcode" aria-hidden="true"></span>
           <span class="label label--white">Kortrijk, BE</span>
         </div>
-        <p class="poster__drag small">( drag the pieces )</p>
       </div>
     </section>
 
@@ -131,7 +135,7 @@
       <header class="section-head">
         <span class="label label--black js-scramble js-index-count">Index (05)</span>
         <h2 class="section-title js-chars">Selected Work</h2>
-        <p class="small section-note">Figma prototypes &amp; motion pieces made during Devine, 2024 — 2026. Click a project to open it.</p>
+        <p class="small section-note">Figma prototypes &amp; motion pieces made during Devine, 2024 - 2026. Click a project to open it.</p>
       </header>
 
       <ol class="work__list js-work-list"><!-- filled by main.js --></ol>
@@ -153,6 +157,7 @@
       <div class="about__collage">
         <div class="ph about__portrait js-paste" data-seed="44" data-speed="0.1" data-tear>
           <img src="assets/images/portfolio_placeholder_self.png" alt="Portrait of Alexander Jonckheere">
+          <span class="face-spot js-face-spot" aria-hidden="true"></span>
         </div>
         <span class="block block--orange about__block about__block--1 js-block" data-speed="0.3"></span>
         <span class="block block--mint about__block about__block--2 js-block" data-speed="-0.25"></span>
@@ -252,7 +257,7 @@
     <section class="contact" id="contact">
       <div class="ink contact__ink contact__ink--1 js-ink" data-seed="52"></div>
       <div class="ink contact__ink contact__ink--2 js-ink" data-seed="61"></div>
-      <span class="label label--mint js-scramble">Got a project? Let's talk.</span>
+      <span class="label label--mint js-scramble">Feel free to email me!</span>
 
       <a href="mailto:alexander.jonckheere@student.howest.be" class="contact__btn js-magnetic" data-cursor="mail">
         <span class="contact__btn-shadow" aria-hidden="true"></span>
@@ -278,9 +283,8 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Draggable.min.js"></script>
-  <script src="js/projects.js?v=36"></script>
-  <script src="js/shared.js?v=36"></script>
-  <script src="js/main.js?v=36"></script>
+  <script src="js/projects.js?v=46"></script>
+  <script src="js/shared.js?v=46"></script>
+  <script src="js/main.js?v=46"></script>
 </body>
 </html>

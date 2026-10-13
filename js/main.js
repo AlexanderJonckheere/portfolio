@@ -1,7 +1,8 @@
 // Home page: collage poster hero, project list, hover + scroll animations.
 
 function workRow(p, i) {
-  const type = p.comingSoon ? "Soon" : p.media.type === "figma" ? "Figma" : "MP4";
+  // media type tag (Figma / MP4); projects without media yet get no tag
+  const type = p.media ? (p.media.type === "figma" ? "Figma" : "MP4") : "";
   return `
       <li class="work__item">
         <a class="work__link" href="project.html?p=${p.slug}" data-cursor="open project"
@@ -10,7 +11,7 @@ function workRow(p, i) {
           <span class="work__num">${String(i + 1).padStart(2, "0")}</span>
           <span class="work__title" data-text="${p.title}">${p.title}</span>
           <span class="work__meta">
-            <span class="label label--black">${type}</span>
+            ${type ? `<span class="label label--black">${type}</span>` : ""}
             ${p.role ? `<span class="label label--white">${p.role}</span>` : ""}
             ${p.finished ? '<span class="label label--mint">Finished</span>' : ""}
             ${p.group ? '<span class="label label--pink">Group</span>' : ""}
@@ -60,7 +61,7 @@ const CLIP_AUSTRALIA = {
     "I love Australia and the outback. That place holds some of my fondest memories.",
   ],
 };
-// placeholder for the right-hand clipping — swap in your own story later
+// placeholder for the right-hand clipping - swap in your own story later
 const CLIP_PLACEHOLDER = {
   title: "Placeholder",
   text: [
@@ -162,7 +163,7 @@ function heroIntro(chars) {
     .from(q(".dot-circle"), { scale: 0, duration: 0.5, ease: "back.out(2.5)", stagger: 0.06 }, "-=0.3")
     .from(q(".poster__tag"), { autoAlpha: 0, duration: 0.01 }, "-=0.2")
     .add(() => q(".js-scramble").forEach((el) => scramble(el, 0.7)), "<")
-    .from(q(".poster__vert, .poster__para, .poster__list li, .poster__foot, .poster__drag"), {
+    .from(q(".poster__vert, .poster__para, .poster__list li, .poster__foot"), {
       autoAlpha: 0,
       y: 16,
       duration: 0.5,
@@ -245,6 +246,43 @@ function glitchPortrait() {
   ScrollTrigger.create({ trigger: portrait, start: "top 80%", once: true, onEnter: () => gsap.delayedCall(1.2, burst) });
 }
 
+// hovering my face on the portrait pops up a glitchy "Me!" that follows the cursor
+function initFacePop() {
+  if (isTouch) return;
+  const spot = document.querySelector(".js-face-spot");
+  const pop = document.querySelector(".face-pop");
+  if (!spot || !pop) return;
+  const text = pop.querySelector(".face-pop__text");
+  const xTo = gsap.quickTo(pop, "x", { duration: 0.35, ease: "power3" });
+  const yTo = gsap.quickTo(pop, "y", { duration: 0.35, ease: "power3" });
+  const r = gsap.utils.random;
+  let glitch;
+
+  spot.addEventListener("mousemove", (e) => {
+    xTo(e.clientX + 18);
+    yTo(e.clientY - 70);
+  });
+  spot.addEventListener("mouseenter", (e) => {
+    gsap.set(pop, { x: e.clientX + 18, y: e.clientY - 70 });
+    gsap.fromTo(pop, { autoAlpha: 1, scale: 0, rotation: -25 }, { scale: 1, rotation: 0, duration: 0.45, ease: "back.out(2.5)", overwrite: true });
+    // keep glitching while hovered
+    glitch = gsap.to(text, {
+      x: () => r(-6, 6),
+      textShadow: () => `${r(-6, 6)}px ${r(-3, 3)}px #ff6cc9, ${r(-6, 6)}px ${r(-3, 3)}px #69ede2`,
+      duration: 0.07,
+      ease: "steps(1)",
+      repeat: -1,
+      repeatDelay: 0.25,
+      repeatRefresh: true,
+    });
+  });
+  spot.addEventListener("mouseleave", () => {
+    if (glitch) glitch.kill();
+    gsap.set(text, { x: 0, textShadow: "0px 0px 0px rgba(0,0,0,0), 0px 0px 0px rgba(0,0,0,0)" });
+    gsap.to(pop, { scale: 0, rotation: 20, duration: 0.25, ease: "power2.in", overwrite: true, onComplete: () => gsap.set(pop, { autoAlpha: 0 }) });
+  });
+}
+
 // background words drift independently, like loose paper cut-outs
 function floatBgWords() {
   gsap.utils.toArray(".bg-word").forEach((w, i) => {
@@ -291,20 +329,37 @@ function initHeroDepth() {
   });
 }
 
-// ---------- Draggable collage pieces ----------
-function initDraggable() {
-  if (typeof Draggable === "undefined") return;
-  let z = 5;
-  Draggable.create(".poster .js-drag", {
-    bounds: ".poster",
-    onPress() {
-      gsap.set(this.target, { zIndex: ++z });
-      gsap.to(this.target, { scale: 1.05, rotation: gsap.utils.random(-5, 5), duration: 0.2 });
-    },
-    onRelease() {
-      gsap.to(this.target, { scale: 1, duration: 0.4, ease: "back.out(3)" });
-    },
+// ---------- Swaying collage pieces ----------
+// pieces near the cursor drift away from it and ease back when it leaves
+function initSway() {
+  if (isTouch) return;
+  const hero = document.querySelector(".hero");
+  const RADIUS = 220;
+  const PUSH = 70;
+  const pieces = gsap.utils.toArray(".poster .js-sway").map((el) => ({
+    el,
+    x: gsap.quickTo(el, "x", { duration: 0.9, ease: "power3" }),
+    y: gsap.quickTo(el, "y", { duration: 0.9, ease: "power3" }),
+    r: gsap.quickTo(el, "rotation", { duration: 1.1, ease: "power3" }),
+  }));
+
+  hero.addEventListener("mousemove", (e) => {
+    pieces.forEach((p) => {
+      const rect = p.el.getBoundingClientRect();
+      // centre of the piece at rest (minus the offset it already has)
+      const cx = rect.left + rect.width / 2 - gsap.getProperty(p.el, "x");
+      const cy = rect.top + rect.height / 2 - gsap.getProperty(p.el, "y");
+      const dx = cx - e.clientX;
+      const dy = cy - e.clientY;
+      const dist = Math.hypot(dx, dy) || 1;
+      const reach = RADIUS + Math.max(rect.width, rect.height) / 2;
+      const force = Math.max(0, 1 - dist / reach);
+      p.x((dx / dist) * force * PUSH);
+      p.y((dy / dist) * force * PUSH);
+      p.r((dx / dist) * force * 10);
+    });
   });
+  hero.addEventListener("mouseleave", () => pieces.forEach((p) => { p.x(0); p.y(0); p.r(0); }));
 }
 
 // ---------- Section titles ----------
@@ -538,7 +593,8 @@ if (!prefersReducedMotion) {
   floatBgWords();
   glitchName(nameChars);
   glitchPortrait();
-  initDraggable();
+  initFacePop();
+  initSway();
   initTitles();
   initPrintReveals();
   initAbout();

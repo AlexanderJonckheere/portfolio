@@ -11,7 +11,7 @@ const ACCENTS = { pink: "#ff6cc9", mint: "#69ede2", orange: "#f9b25c" };
 const svgUrl = (svg) => svg;
 
 const TEX = {
-  // grayscale photocopy "image" — stands in for a real photo
+  // grayscale photocopy "image" - stands in for a real photo
   xerox: (seed) => svgUrl(`<svg xmlns="http://www.w3.org/2000/svg" width="500" height="640" viewBox="0 0 500 640">
     <filter id="f" x="0" y="0" width="100%" height="100%">
       <feTurbulence type="fractalNoise" baseFrequency="0.004 0.011" numOctaves="5" seed="${seed}" result="n"/>
@@ -31,7 +31,7 @@ const TEX = {
     <rect width="100%" height="100%" filter="url(#f)"/>
   </svg>`),
 
-  // crisp ink splatter, denser towards the centre — black ink, or a mask for coloured splats
+  // crisp ink splatter, denser towards the centre - black ink, or a mask for coloured splats
   splat: (seed) => `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
     <defs>
       <radialGradient id="g"><stop offset="0.05" stop-color="#000"/><stop offset="1" stop-color="#fff"/></radialGradient>
@@ -50,7 +50,7 @@ const TEX = {
     <rect width="100%" height="100%" fill="url(#g)" filter="url(#f)"/>
   </svg>`,
 
-  // opaque with photocopy dropouts + scratches — used as a mask on big type
+  // opaque with photocopy dropouts + scratches - used as a mask on big type
   distress: (seed) => `<svg xmlns="http://www.w3.org/2000/svg" width="420" height="420">
     <filter id="f" x="0" y="0" width="100%" height="100%">
       <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="2" seed="${seed}" result="a"/>
@@ -203,7 +203,7 @@ function splitWords(el) {
 }
 
 // Typewriter / photocopy "scramble" of a label's text
-const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&*/—+=0123456789";
+const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&*/-+=0123456789";
 function scramble(el, duration = 0.9) {
   const final = el.dataset.final || (el.dataset.final = el.textContent);
   const state = { p: 0 };
@@ -246,9 +246,9 @@ function initCursor() {
     yTo(e.clientY);
   });
   document.addEventListener("mouseover", (e) => {
-    const t = e.target.closest("[data-cursor], a, button, .js-drag");
+    const t = e.target.closest("[data-cursor], a, button");
     cursor.classList.toggle("is-hover", !!t);
-    const text = t && (t.dataset.cursor || (t.classList.contains("js-drag") ? "drag" : ""));
+    const text = t && t.dataset.cursor;
     cursor.classList.toggle("has-label", !!text);
     if (text) label.textContent = text;
   });

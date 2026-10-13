@@ -1,7 +1,7 @@
 /* =========================================================
    Style guide (Figma "style guide" page)
    Paper white + black ink, pink / mint / orange print blocks.
-   Mood: photocopied collage posters — xerox images, ink
+   Mood: photocopied collage posters - xerox images, ink
    splatter, flat colour blocks printed over (multiply),
    heavy grotesk type, black label bars, bold stacked lists.
    ========================================================= */
@@ -122,7 +122,7 @@ h1, h2, h3, h4, p, figure, dl, dd { margin: 0; }
   background-position: center;
 }
 
-/* xerox placeholder — swap for <img> (keep class "ph" for the print look) */
+/* xerox placeholder - swap for <img> (keep class "ph" for the print look) */
 .ph {
   position: relative;
   overflow: hidden;
@@ -258,7 +258,7 @@ h1, h2, h3, h4, p, figure, dl, dd { margin: 0; }
 .nav__links a:hover::before { transform: scaleX(1); transform-origin: left; }
 
 /* =========================================================
-   HERO — one cluttered collage poster.
+   HERO - one cluttered collage poster.
    Like the moodboard posters, but the central "figure"
    is my name instead of a silhouette.
    ========================================================= */
@@ -274,7 +274,6 @@ h1, h2, h3, h4, p, figure, dl, dd { margin: 0; }
 /* the whole front layer prints in multiply over the name, like ink on ink */
 .layer--front { z-index: 3; pointer-events: none; mix-blend-mode: multiply; }
 .layer--top { z-index: 4; pointer-events: none; }
-.layer--front .js-drag { pointer-events: auto; }
 .poster > :not(.layer) { position: absolute; }
 
 /* --- the name = the figure --- */
@@ -430,14 +429,21 @@ h1, h2, h3, h4, p, figure, dl, dd { margin: 0; }
 .poster__tag { position: absolute; right: 4%; top: 30%; font-size: clamp(14px, 1.5vw, 22px); letter-spacing: 0.08em; rotate: 2deg; }
 
 /* --- type around the edges --- */
+/* vertical school info: one item per segment, each kept on its own run */
 .poster__vert {
   left: 0;
   bottom: 0;
   z-index: 4;
+  display: flex;
+  gap: 18px;
+  padding: 8px 3px;
   writing-mode: vertical-rl;
   transform: rotate(180deg);
-  max-height: 60%;
+  letter-spacing: 0.04em;
+  background: var(--paper);
 }
+.poster__vert span { white-space: nowrap; }
+.poster__vert span + span::before { content: "·"; margin-bottom: 18px; display: inline-block; opacity: 0.5; }
 /* the quote sits quietly in the collage: small and faded */
 .poster__para {
   right: 0;
@@ -477,11 +483,8 @@ h1, h2, h3, h4, p, figure, dl, dd { margin: 0; }
   line-height: 1.04;
   letter-spacing: -0.02em;
 }
-.poster__foot { left: 26px; bottom: 0; z-index: 4; display: flex; align-items: flex-end; gap: 8px; }
+.poster__foot { left: 30px; bottom: 0; z-index: 4; display: flex; align-items: flex-end; gap: 8px; }
 .poster__foot .barcode { height: 28px; width: 100px; }
-.poster__drag { left: 0; right: 0; bottom: 0; z-index: 4; text-align: center; pointer-events: none; }
-.js-drag { cursor: grab; }
-.js-drag:active { cursor: grabbing; }
 
 .signature {
   position: absolute;
@@ -602,6 +605,29 @@ section { position: relative; }
 .about__portrait { position: absolute; left: 6%; top: 0; width: 80%; aspect-ratio: 973 / 1080; }
 /* the portrait is already a pink/black stencil: keep its colours, add print grit on top */
 .about__portrait img { filter: contrast(1.1); object-fit: contain; }
+/* invisible hotspot over the face: hovering it shows the "Me!" popup */
+.face-spot { position: absolute; left: 20%; top: 6%; width: 60%; height: 64%; z-index: 3; border-radius: 45%; }
+.face-pop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 96;
+  pointer-events: none;
+  visibility: hidden;
+}
+.face-pop__text {
+  display: inline-block;
+  padding: 2px 12px 5px;
+  border: 3px solid var(--black);
+  background: var(--mint);
+  color: var(--black);
+  font-size: clamp(32px, 3.4vw, 54px);
+  font-weight: 900;
+  font-variation-settings: "wdth" 70;
+  line-height: 1;
+  rotate: -6deg;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
 .glitch-slice { position: absolute; inset: 0; z-index: 1; visibility: hidden; opacity: 0; pointer-events: none; }
 .glitch-slice img { width: 100%; height: 100%; object-fit: contain; filter: contrast(1.1); }
 .about__portrait::after {
@@ -702,7 +728,7 @@ section { position: relative; }
   line-height: 0.85;
   letter-spacing: -0.02em;
 }
-/* every card: title, then its list — each list has its own print style */
+/* every card: title, then its list - each list has its own print style */
 .cap__items { width: 100%; }
 
 /* 01 dev: black terminal card */
@@ -1142,7 +1168,7 @@ section { position: relative; }
   .poster__name { font-size: 23vw; inset: 0 0 14% 0; }
   .poster__line { transform: scaleY(1.5); }
   .poster__line + .poster__line { margin-top: 0.45em; }
-  .poster__para, .poster__vert, .poster__drag, .c1, .c2, .c3, .b2, .s5, .t1, .t2, .t3,
+  .poster__para, .poster__vert, .c1, .c2, .c3, .b2, .s5, .t1, .t2, .t3,
   .p-ink--1, .sp1, .box-grid, .f1 { display: none; }
   .poster__bg-type { left: 2%; top: 5%; font-size: 10vw; }
   .poster__tag { top: 70%; right: auto; left: 0; }

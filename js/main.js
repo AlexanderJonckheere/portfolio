@@ -61,13 +61,13 @@ const CLIP_AUSTRALIA = {
     "I love Australia and the outback. That place holds some of my fondest memories.",
   ],
 };
-// placeholder for the right-hand clipping - swap in your own story later
+// right-hand clipping: about the Devine programme
 const CLIP_PLACEHOLDER = {
-  title: "Placeholder",
+  title: "Devine",
   text: [
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "Devine is a bachelor programme at Howest in Kortrijk. It stands for Digital Design & Development.",
+    "You learn both sides of making for the screen: design, like UI, motion and 3D, and development, like front-end code and interactive work.",
+    "Most of the work happens in projects, alone and in teams, often for real clients.",
   ],
 };
 

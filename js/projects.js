@@ -109,7 +109,7 @@ const PROJECTS = [
     color: "pink",
     media: {
       type: "model",
-      src: "assets/models/montana-cans.glb",
+      src: "assets/models/montana-cans.glb?v=2",
       // sticker materials in the .blend that play a video
       videos: { sticker_mp4: "assets/videos/montana-sticker.mp4", sticker2: "assets/videos/montana-sticker2.mp4" },
       // the can that drops in from the sky shouldn't count when framing the view

@@ -2,6 +2,7 @@
 // renders the sections a project actually has.
 //
 // personal: true    → listed under the "Personal projects" button instead of Selected Work
+// wip: "text"       → adds a "…, stay tuned!" note at the bottom of a written-up page
 // comingSoon: true  → detail page only shows a "will update soon" note (no media needed)
 // finished: true    → shows a "Finished" tag in the list
 //
@@ -11,6 +12,7 @@
 //          or { video, caption } for a short clip that loops silently.
 //          Extra flags: wide: true (half-width, uncropped), color: true (skip the black & white look),
 //          note: { text, x, y } - floating arrow + glitchy label, x/y in % of the image (top-left of the label)
+// media.type: "model" → media.src = "assets/models/name.glb" (three.js viewer), media.videos = { materialName: mp4 }
 // media.size: "small" → shows the media narrower than the full page width (optional)
 const PROJECTS = [
   {
@@ -97,6 +99,31 @@ const PROJECTS = [
     learned: "UX/UI design for an app and a kiosk, testing early, projection mapping, and how much good teamwork depends on talking things through before you build them.",
   },
   {
+    slug: "montana-cans",
+    title: "Montana Cans",
+    year: "2026",
+    role: "3D modelling & animation",
+    discipline: "3D · Motion",
+    context: "Devine - year 3",
+    tags: ["3D", "Blender", "Animation"],
+    color: "pink",
+    media: {
+      type: "model",
+      src: "assets/models/montana-cans.glb",
+      // sticker materials in the .blend that play a video
+      videos: { sticker_mp4: "assets/videos/montana-sticker.mp4", sticker2: "assets/videos/montana-sticker2.mp4" },
+      // the can that drops in from the sky shouldn't count when framing the view
+      fitIgnore: ["spray_can_1_bottom.002"],
+      caption: "Interactive 3D - drag to look around",
+    },
+    intro:
+      "A 3D hero scene for the website of Montana Cans.",
+    body: [
+      "For this assignment we had to choose a random brand we liked, and then make a 3D scene for the hero image of their website. I chose Montana Cans.",
+      "After some trial and error I settled on this scene and composition. I experimented with hand-painted normal maps and some 2D animations on the stickers.",
+    ],
+  },
+  {
     slug: "type01",
     title: "Type01",
     year: "2025",
@@ -154,9 +181,18 @@ const PROJECTS = [
     discipline: "Metalworking",
     context: "Personal project",
     personal: true,
-    comingSoon: true,
     tags: ["Personal", "Metalworking"],
     color: "pink",
+    intro: "The first 5 nails I made, cut out of aluminium.",
+    body: [
+      "These are the first 5 nails I made. I cut them out of aluminium. After designing and 3D printing a dapping punch, and 5 failed attempts, I got the hammering and shaping down.",
+      "Then I started polishing and sanding, and cleaned up all edges and surfaces. Still to do: the 5 other nails.",
+    ],
+    gallery: [{ src: "assets/images/metal-nails-first-five.jpg", caption: "The first 5 nails, hammered, sanded and polished", color: true, wide: true },
+      { src: "assets/images/metal-nails-hand.jpg", caption: "Trying them on a 3D printed hand", color: true, wide: true },
+    ],
+    // project is still going: closing note under the page
+    wip: "5 more to go,",
   },
   {
     slug: "wooden-rings",

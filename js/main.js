@@ -2,7 +2,7 @@
 
 function workRow(p, i) {
   // media type tag (Figma / MP4); projects without media yet get no tag
-  const type = p.media ? (p.media.type === "figma" ? "Figma" : "MP4") : "";
+  const type = p.media ? ({ figma: "Figma", model: "3D" }[p.media.type] || "MP4") : "";
   return `
       <li class="work__item">
         <a class="work__link" href="project.html?p=${p.slug}" data-cursor="open project"

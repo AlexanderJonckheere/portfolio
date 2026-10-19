@@ -962,6 +962,15 @@ section { position: relative; }
 .project__media { position: relative; padding: 30px var(--edge) 60px; }
 .project__media--small .media-frame,
 .project__media--small .media-frame__caption { max-width: 900px; margin-left: auto; margin-right: auto; }
+/* 3D viewer */
+.model-view { position: absolute; inset: 0; background: var(--paper); cursor: grab; overflow: hidden; }
+/* soft print noise behind the 3D scene */
+.model-view__grit { position: absolute; inset: 0; z-index: 0; background-size: 300px 300px; opacity: 0.55; mix-blend-mode: multiply; pointer-events: none; }
+.model-view canvas { position: relative; z-index: 1; }
+.model-view:active { cursor: grabbing; }
+.model-view canvas { display: block; width: 100%; height: 100%; }
+.model-view__status { position: absolute; left: 16px; bottom: 16px; z-index: 2; pointer-events: none; transition: opacity 0.4s; }
+.model-view.is-touched .model-view__status { opacity: 0; }
 .project__media--small .media-frame__caption { display: block; width: fit-content; margin-right: max(0px, calc((100% - 900px) / 2)); }
 .media-frame {
   position: relative;

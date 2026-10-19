@@ -13,6 +13,11 @@ function renderMedia(p, index) {
   if (media.type === "figma" && media.url) {
     return `<iframe src="${figmaEmbedUrl(media.url)}" allowfullscreen loading="lazy" title="${p.title} - Figma"></iframe>`;
   }
+  if (media.type === "model" && media.src) {
+    return `<div class="model-view js-model" data-src="${media.src}" data-videos='${JSON.stringify(media.videos || {})}' data-fit-ignore="${(media.fitIgnore || []).join(",")}">
+      <span class="label label--black model-view__status js-model-status">Loading 3D</span>
+    </div>`;
+  }
   if (media.type === "video" && media.src) {
     return `<video src="${media.src}" ${media.poster ? `poster="${media.poster}"` : ""} controls playsinline preload="metadata"></video>`;
   }
@@ -148,15 +153,18 @@ function renderReflection(p) {
 }
 
 function renderCase(p, index, accent, isVideo) {
-  return `
+  // projects without a main video / Figma / 3D file skip the big media block
+  const mediaBlock = p.media ? `
     <section class="project__media ${p.media.size === "small" ? "project__media--small" : ""}">
       <div class="media-frame">
         ${renderMedia(p, index)}
         <span class="block media-frame__block js-block" style="background-color:${accent}"></span>
-        <span class="label label--black label--lg media-frame__badge">${isVideo ? "▶ MP4" : "✦ Figma"}</span>
+        <span class="label label--black label--lg media-frame__badge">${isVideo ? "▶ MP4" : p.media.type === "model" ? "✦ 3D" : "✦ Figma"}</span>
       </div>
       ${p.media.caption ? `<p class="label label--white media-frame__caption">${p.media.caption}</p>` : ""}
-    </section>
+    </section>` : "";
+  return `
+    ${mediaBlock}
 
     <section class="project__content">
       <div>
@@ -171,17 +179,18 @@ function renderCase(p, index, accent, isVideo) {
     ${renderQuestion(p)}
     ${renderTeam(p)}
     ${renderProcess(p)}
-    ${renderReflection(p)}`;
+    ${renderReflection(p)}
+    ${p.wip ? renderSoon(p, p.wip) : ""}`;
 }
 
 // placeholder page for projects that aren't written up yet
-function renderSoon(p) {
+function renderSoon(p, note = "Will update soon,") {
   return `
     <section class="p-section p-soon">
       <div class="ink p-soon__ink js-ink" data-seed="${p.slug.length * 7}"></div>
       ${sectionLabel("Work in progress")}
       <p class="p-soon__text" style="--accent:${ACCENTS[p.color]}">
-        <span class="p-soon__line">Will update soon,</span>
+        <span class="p-soon__line">${note}</span>
         <span class="p-soon__line p-soon__line--alt">stay tuned!</span>
       </p>
     </section>`;

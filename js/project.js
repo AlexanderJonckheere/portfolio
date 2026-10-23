@@ -19,7 +19,8 @@ function renderMedia(p, index) {
     </div>`;
   }
   if (media.type === "video" && media.src) {
-    return `<video src="${media.src}" ${media.poster ? `poster="${media.poster}"` : ""} controls playsinline preload="metadata"></video>`;
+    const loop = media.loop ? "autoplay muted loop" : 'preload="metadata"';
+    return `<video src="${media.src}" ${media.poster ? `poster="${media.poster}"` : ""} controls playsinline ${loop}></video>`;
   }
 
   // Placeholder until the real Figma link / mp4 is added in projects.js
@@ -155,7 +156,7 @@ function renderReflection(p) {
 function renderCase(p, index, accent, isVideo) {
   // projects without a main video / Figma / 3D file skip the big media block
   const mediaBlock = p.media ? `
-    <section class="project__media ${p.media.size === "small" ? "project__media--small" : ""}">
+    <section class="project__media ${p.media.size === "small" ? "project__media--small" : ""} ${p.media.decor === "bottom" ? "project__media--decor-bottom" : ""}">
       <div class="media-frame">
         ${renderMedia(p, index)}
         <span class="block media-frame__block js-block" style="background-color:${accent}"></span>

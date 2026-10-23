@@ -11,25 +11,85 @@ const ACCENTS = { pink: "#ff6cc9", mint: "#69ede2", orange: "#f9b25c" };
 const svgUrl = (svg) => svg;
 
 const TEX = {
-  // grayscale photocopy "image" - stands in for a real photo
-  xerox: (seed) => svgUrl(`<svg xmlns="http://www.w3.org/2000/svg" width="500" height="640" viewBox="0 0 500 640">
-    <filter id="f" x="0" y="0" width="100%" height="100%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.004 0.011" numOctaves="5" seed="${seed}" result="n"/>
+  // grayscale photocopy "image" — stands in for a real photo.
+  // Six print styles so the scraps in a collage don't all look the same:
+  // 0 streaky copy, 1 vertical streaks, 2 soft photo blotches, 3 halftone, 4 heavy dark copy, 5 text rows
+  xerox: (seed, style = seed % 6) => {
+    const tones = {
+      light: "0 0.25 0.6 0.85 0.95 1 1",
+      mid: "0 0.05 0.3 0.75 0.95 1 1",
+      dark: "0 0 0.05 0.15 0.4 0.8 1",
+    };
+    const copy = (freq, tone, lines, dots, lineOffset = 8.5) => `
+      <feTurbulence type="fractalNoise" baseFrequency="${freq}" numOctaves="5" seed="${seed}" result="n"/>
       <feColorMatrix in="n" type="saturate" values="0" result="g"/>
       <feComponentTransfer in="g" result="p">
-        <feFuncR type="discrete" tableValues="0 0.05 0.3 0.75 0.95 1 1"/>
-        <feFuncG type="discrete" tableValues="0 0.05 0.3 0.75 0.95 1 1"/>
-        <feFuncB type="discrete" tableValues="0 0.05 0.3 0.75 0.95 1 1"/>
+        <feFuncR type="discrete" tableValues="${tones[tone]}"/>
+        <feFuncG type="discrete" tableValues="${tones[tone]}"/>
+        <feFuncB type="discrete" tableValues="${tones[tone]}"/>
         <feFuncA type="table" tableValues="1 1"/>
       </feComponentTransfer>
       <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="${seed + 1}" result="s"/>
-      <feColorMatrix in="s" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -16 0 0 0 5.9" result="dots"/>
-      <feTurbulence type="fractalNoise" baseFrequency="0.002 0.08" numOctaves="2" seed="${seed + 2}" result="l"/>
-      <feColorMatrix in="l" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -24 0 0 0 8.5" result="lines"/>
-      <feMerge><feMergeNode in="p"/><feMergeNode in="lines"/><feMergeNode in="dots"/></feMerge>
-    </filter>
-    <rect width="100%" height="100%" filter="url(#f)"/>
-  </svg>`),
+      <feColorMatrix in="s" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -16 0 0 0 ${dots}" result="dots"/>
+      <feTurbulence type="fractalNoise" baseFrequency="${lines}" numOctaves="2" seed="${seed + 2}" result="l"/>
+      <feColorMatrix in="l" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -24 0 0 0 ${lineOffset}" result="lines"/>
+      <feMerge><feMergeNode in="p"/><feMergeNode in="lines"/><feMergeNode in="dots"/></feMerge>`;
+
+    let body;
+    if (style === 3) {
+      // halftone: a dot screen, dots only where the "photo" is dark
+      body = `
+      <defs>
+        <pattern id="d" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(${15 + (seed % 4) * 15})">
+          <circle cx="4.5" cy="4.5" r="3.6" fill="#111"/>
+        </pattern>
+        <filter id="m" x="0" y="0" width="100%" height="100%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.007" numOctaves="4" seed="${seed}"/>
+          <feColorMatrix type="saturate" values="0"/>
+          <feComponentTransfer><feFuncA type="table" tableValues="1 1"/><feFuncR type="table" tableValues="0 0 0 1 1 1"/><feFuncG type="table" tableValues="0 0 0 1 1 1"/><feFuncB type="table" tableValues="0 0 0 1 1 1"/></feComponentTransfer>
+        </filter>
+        <mask id="k"><rect width="100%" height="100%" filter="url(#m)"/></mask>
+        <pattern id="d2" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(${15 + (seed % 4) * 15})">
+          <circle cx="4.5" cy="4.5" r="1.9" fill="#111"/>
+        </pattern>
+        <filter id="m2" x="0" y="0" width="100%" height="100%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.007" numOctaves="4" seed="${seed}"/>
+          <feColorMatrix type="saturate" values="0"/>
+          <feComponentTransfer><feFuncA type="table" tableValues="1 1"/><feFuncR type="table" tableValues="0 1 1 0 0 0"/><feFuncG type="table" tableValues="0 1 1 0 0 0"/><feFuncB type="table" tableValues="0 1 1 0 0 0"/></feComponentTransfer>
+        </filter>
+        <mask id="k2"><rect width="100%" height="100%" filter="url(#m2)"/></mask>
+      </defs>
+      <rect width="100%" height="100%" fill="#e9e7e2"/>
+      <rect width="100%" height="100%" fill="url(#d)" mask="url(#k)"/>
+      <rect width="100%" height="100%" fill="url(#d2)" mask="url(#k2)"/>`;
+      return `<svg xmlns="http://www.w3.org/2000/svg" width="500" height="640" viewBox="0 0 500 640">${body}</svg>`;
+    }
+    if (style === 5) {
+      // text rows: lines of "copy" on paper, with a smudge
+      body = `
+      <filter id="f" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.09 0.012" numOctaves="2" seed="${seed}" result="w"/>
+        <feTurbulence type="turbulence" baseFrequency="0 0.11" numOctaves="1" seed="${seed + 3}" result="r"/>
+        <feComposite in="w" in2="r" operator="arithmetic" k1="2.2" k2="0" k3="0" k4="0" result="t"/>
+        <feColorMatrix in="t" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -0 0 0 30 -8.5" result="text"/>
+        <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="3" seed="${seed + 5}" result="sm"/>
+        <feColorMatrix in="sm" type="matrix" values="0 0 0 0 0.45  0 0 0 0 0.45  0 0 0 0 0.45  -9 0 0 0 4.1" result="smudge"/>
+        <feFlood flood-color="#ebe9e4" result="paper"/>
+        <feMerge><feMergeNode in="paper"/><feMergeNode in="smudge"/><feMergeNode in="text"/></feMerge>
+      </filter>`;
+    } else {
+      const looks = [
+        ["0.004 0.011", "mid", "0.002 0.08", 5.9], // 0 streaky copy (the original)
+        ["0.011 0.004", "mid", "0.08 0.002", 5.9], // 1 vertical streaks
+        ["0.006 0.006", "light", "0.002 0.08", 4.6, -1], // 2 soft photo blotches, no streaks
+        null,
+        ["0.009 0.006", "dark", "0.002 0.12", 4.2], // 4 heavy dark copy, white specks
+      ][style];
+      body = `<filter id="f" x="0" y="0" width="100%" height="100%">${copy(...looks)}</filter>`;
+    }
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="500" height="640" viewBox="0 0 500 640">${body}
+    <rect width="100%" height="100%" filter="url(#f)"/></svg>`;
+  },
 
   // crisp ink splatter, denser towards the centre - black ink, or a mask for coloured splats
   splat: (seed) => `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
@@ -83,8 +143,8 @@ const TEX = {
 const TEX_SIZE = { xerox: [500, 640], splat: [600, 600], distress: [420, 420], speckle: [300, 300], paper: [600, 600] };
 const texCache = new Map();
 
-function texture(kind, seed = 0) {
-  const key = `${kind}-${seed}`;
+function texture(kind, seed = 0, variant) {
+  const key = `${kind}-${seed}-${variant}`;
   if (!texCache.has(key)) {
     texCache.set(key, new Promise((resolve) => {
       const img = new Image();
@@ -96,14 +156,14 @@ function texture(kind, seed = 0) {
         canvas.getContext("2d").drawImage(img, 0, 0, w, h);
         canvas.toBlob((blob) => resolve(`url(${URL.createObjectURL(blob)})`));
       };
-      img.src = `data:image/svg+xml,${encodeURIComponent(TEX[kind](seed))}`;
+      img.src = `data:image/svg+xml,${encodeURIComponent(TEX[kind](seed, variant))}`;
     }));
   }
   return texCache.get(key);
 }
 
-function setTexture(el, kind, seed) {
-  return texture(kind, seed).then((url) => (el.style.backgroundImage = url));
+function setTexture(el, kind, seed, variant) {
+  return texture(kind, seed, variant).then((url) => (el.style.backgroundImage = url));
 }
 
 function setMask(el, kind, seed) {
@@ -128,7 +188,7 @@ function applyTextures(root = document) {
   const jobs = [];
   root.querySelectorAll(".ph").forEach((el, i) => {
     if (el.querySelector("img, video, iframe")) return;
-    jobs.push(setTexture(el, "xerox", Number(el.dataset.seed) || i * 7 + 3));
+    jobs.push(setTexture(el, "xerox", Number(el.dataset.seed) || i * 7 + 3, el.dataset.style ? Number(el.dataset.style) : undefined));
   });
   root.querySelectorAll(".ink").forEach((el, i) => {
     jobs.push(setTexture(el, "splat", Number(el.dataset.seed) || i * 5 + 1));

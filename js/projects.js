@@ -13,6 +13,7 @@
 //          Extra flags: wide: true (half-width, uncropped), color: true (skip the black & white look),
 //          note: { text, x, y } - floating arrow + glitchy label, x/y in % of the image (top-left of the label)
 // media.type: "model" → media.src = "assets/models/name.glb" (three.js viewer), media.videos = { materialName: mp4 }
+// media.loop: true → video autoplays muted on a loop (for short hero animations)
 // media.size: "small" → shows the media narrower than the full page width (optional)
 const PROJECTS = [
   {
@@ -108,13 +109,14 @@ const PROJECTS = [
     tags: ["3D", "Blender", "Animation"],
     color: "pink",
     media: {
-      type: "model",
-      src: "assets/models/montana-cans.glb?v=5",
-      // sticker materials in the .blend that play a video
-      videos: { sticker_mp4: "assets/videos/montana-sticker.mp4", sticker2: "assets/videos/montana-sticker2.mp4" },
-      // the can that drops in from the sky shouldn't count when framing the view
-      fitIgnore: ["spray_can_1_bottom.002"],
-      caption: "Interactive 3D - drag to look around",
+      type: "video",
+      src: "assets/videos/montana-cans-final.mp4",
+      poster: "assets/images/montana-cans-poster.jpg",
+      // short hero animation: plays muted on a loop, controls stay available
+      loop: true,
+      // the video has its own logo / menu at the top: keep the tape & badge at the bottom
+      decor: "bottom",
+      caption: "Final render - hero animation for the Montana Cans website",
     },
     intro:
       "A 3D hero scene for the website of Montana Cans.",

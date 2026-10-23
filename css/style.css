@@ -1017,6 +1017,8 @@ section { position: relative; }
 .project__body p { max-width: 440px; }
 
 /* ---------- case study sections ---------- */
+.project__media--decor-bottom .media-frame__block { top: auto; bottom: -4%; }
+.project__media--decor-bottom .media-frame__badge { top: auto; bottom: -14px; right: auto; left: 30%; }
 .media-frame__caption { display: table; margin: 14px 0 0 auto; rotate: 1deg; }
 .p-label { margin-bottom: 18px; }
 .p-section { position: relative; padding: 70px var(--edge); }

@@ -29,28 +29,38 @@ function initViewer(el) {
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.AgXToneMapping;
-  renderer.toneMappingExposure = 1.1;
+  renderer.toneMappingExposure = 1.25;
   renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.shadowMap.type = THREE.VSMShadowMap; // soft, blurred shadows like big area lights
   el.prepend(renderer.domElement);
 
   const scene = new THREE.Scene();
   const pmrem = new THREE.PMREMGenerator(renderer);
   scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-  scene.environmentIntensity = 0.55;
+  // a strong soft environment stands in for Cycles' bounced light
+  scene.environmentIntensity = 0.8;
 
-  // warm key + cool fill, roughly like the area lights in the .blend
-  const key = new THREE.DirectionalLight(0xfff1e0, 2.4);
-  key.position.set(4, 9, 6);
+  // the four area lights from the .blend (Blender Z-up -> three.js Y-up: x, z, -y),
+  // as soft directional lights; only the main one casts a (blurred) shadow
+  const key = new THREE.DirectionalLight(0xffe9d2, 1.9); // "Area"
+  key.position.set(-0.07, 6.44, -4.8);
   key.castShadow = true;
   key.shadow.mapSize.set(2048, 2048);
-  key.shadow.bias = -0.0004;
+  key.shadow.radius = 14;
+  key.shadow.blurSamples = 20;
+  key.shadow.bias = -0.0006;
   Object.assign(key.shadow.camera, { left: -6, right: 6, top: 8, bottom: -4, near: 0.5, far: 30 });
   scene.add(key);
-  const fill = new THREE.DirectionalLight(0xdbe8ff, 0.9);
-  fill.position.set(-6, 4, -4);
+  const key2 = new THREE.DirectionalLight(0xfff0e0, 1.5); // "Area.001"
+  key2.position.set(3.2, 6.05, 3.85);
+  scene.add(key2);
+  const top = new THREE.DirectionalLight(0xffffff, 0.35); // "Area.002"
+  top.position.set(0.2, 9, 0.6);
+  scene.add(top);
+  const fill = new THREE.DirectionalLight(0xdbebff, 0.6); // "Area.003", cool fill
+  fill.position.set(-5.58, 4.2, 3.89);
   scene.add(fill);
-  scene.add(new THREE.HemisphereLight(0xffffff, 0x8a7f72, 0.6));
+  scene.add(new THREE.HemisphereLight(0xfff3e6, 0x8f6f5c, 0.6));
 
   const camera = new THREE.PerspectiveCamera(23, 16 / 9, 0.1, 200);
   const controls = new OrbitControls(camera, renderer.domElement);
@@ -108,6 +118,12 @@ function initViewer(el) {
         if (!o.isMesh) return;
         o.castShadow = true;
         o.receiveShadow = true;
+        // the bricks were simplified for the web; at full strength their normal maps
+        // read much harsher than in the Cycles render, so tone them down
+        const matName = (o.material && o.material.name || "").toLowerCase();
+        if (o.material && o.material.normalMap && /brick|concrete/.test(matName)) {
+          o.material.normalScale.multiplyScalar(0.38);
+        }
         // sticker materials: play the original videos on them
         const src = videos[o.material && o.material.name];
         if (src) {

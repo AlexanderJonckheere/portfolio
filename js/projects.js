@@ -122,6 +122,12 @@ const PROJECTS = [
       "For this assignment we had to choose a random brand we liked, and then make a 3D scene for the hero image of their website. I chose Montana Cans.",
       "After some trial and error I settled on this scene and composition. I experimented with hand-painted normal maps and some 2D animations on the stickers.",
     ],
+    // process screenshots from Blender, shown at the bottom of the page
+    gallery: [
+      { src: "assets/images/montana-process-animation.webp", caption: "Process - keyframing the falling can in the Dope Sheet", wide: true, color: true },
+      { src: "assets/images/montana-process-scene.webp", caption: "Process - the full scene in solid view, about 2.2 million triangles", wide: true, color: true },
+      { src: "assets/images/montana-process-uv.webp", caption: "Process - UV unwrapping one of the spray cans", wide: true, color: true },
+    ],
   },
   {
     slug: "type01",
